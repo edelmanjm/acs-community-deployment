@@ -31,6 +31,7 @@ services:
                 "
         ports:
             - 8082:8080 #Browser port
+        restart: unless-stopped
 
     share:
         image: alfresco/alfresco-share:6.0.c
@@ -41,6 +42,7 @@ services:
             - "CATALINA_OPTS= -Xms500m -Xmx500m"
         ports:
             - 8080:8080
+        restart: unless-stopped
 
     postgres:
         image: postgres:10.1
@@ -52,6 +54,7 @@ services:
         command: postgres -c max_connections=300 -c log_min_messages=LOG
         ports:
             - 5432:5432
+        restart: unless-stopped
 
     solr6:
         image: alfresco/alfresco-search-services:1.2.0
@@ -68,6 +71,7 @@ services:
             - "SOLR_JAVA_MEM=-Xms2g -Xmx2g"
         ports:
             - 8083:8983 #Browser port
+        restart: unless-stopped
 
     activemq:
         image: alfresco/alfresco-activemq:5.15.6
@@ -77,3 +81,4 @@ services:
             - 5672:5672 # AMQP
             - 61616:61616 # OpenWire
             - 61613:61613 # STOMP
+        restart: unless-stopped
